@@ -501,6 +501,11 @@
   <order>
     <hop>
       <from>Extraction depuis fichier</from>
+      <to>Ajout séquence</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Ajout séquence</from>
       <to>Insertion / Mise à jour table</to>
       <enabled>Y</enabled>
     </hop>
@@ -620,8 +625,43 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>200</xloc>
-      <yloc>100</yloc>
+      <xloc>192</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Ajout séquence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>seller_key</valuename>
+    <use_database>N</use_database>
+    <connection>DW_PROJECT</connection>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -654,6 +694,12 @@
         <condition>=</condition>
         <name2/>
       </key>
+      <key>
+        <name>seller_key</name>
+        <field>seller_key</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
       <value>
         <name>seller_id</name>
         <rename>seller_id</rename>
@@ -662,6 +708,11 @@
       <value>
         <name>seller_name</name>
         <rename>seller_name</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>seller_key</name>
+        <rename>seller_key</rename>
         <update>Y</update>
       </value>
     </lookup>
@@ -674,8 +725,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>100</yloc>
+      <xloc>552</xloc>
+      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
