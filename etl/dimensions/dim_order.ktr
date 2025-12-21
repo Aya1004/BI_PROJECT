@@ -677,7 +677,7 @@
     <passing_through_fields>N</passing_through_fields>
     <accept_field/>
     <accept_stepname/>
-    <separator>,</separator>
+    <separator>;</separator>
     <enclosure>"</enclosure>
     <enclosure_breaks>N</enclosure_breaks>
     <escapechar/>
@@ -701,7 +701,7 @@
     <length>Characters</length>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C:\Users\HP\OneDrive\Desktop\Dataset_Ecommerce\Ecommerce Order Dataset\train\Orders.csv</name>
+      <name>C:\Users\hp\Desktop\BI_PROJECT\data\df_Orders.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -716,9 +716,9 @@
         <name>order_id</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -731,9 +731,9 @@
         <name>customer_id</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -746,24 +746,24 @@
         <name>order_status</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>9</length>
+        <length>11</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
         <name>order_purchase_timestamp</name>
-        <type>Date</type>
-        <format>dd/MM/yyyy</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -774,11 +774,11 @@
       </field>
       <field>
         <name>order_approved_at</name>
-        <type>Date</type>
-        <format>dd/MM/yyyy</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -789,11 +789,11 @@
       </field>
       <field>
         <name>order_delivered_timestamp</name>
-        <type>Date</type>
-        <format>dd/MM/yyyy</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <type>String</type>
+        <format/>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -806,9 +806,9 @@
         <name>order_estimated_delivery_date</name>
         <type>Date</type>
         <format>dd/MM/yyyy</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
