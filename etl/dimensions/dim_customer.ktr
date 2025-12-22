@@ -441,9 +441,9 @@
     <type>MYSQL</type>
     <access>Native</access>
     <database>dw_project</database>
-    <port>3306</port>
-    <username>pentaho</username>
-    <password>Encrypted 2be98afc86aa78281a50daf78d1c3fd89</password>
+    <port>3307</port>
+    <username>root</username>
+    <password>Encrypted </password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -470,7 +470,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>3306</attribute>
+        <attribute>3307</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -525,7 +525,7 @@
     <passing_through_fields>N</passing_through_fields>
     <accept_field/>
     <accept_stepname/>
-    <separator>,</separator>
+    <separator>;</separator>
     <enclosure>"</enclosure>
     <enclosure_breaks>N</enclosure_breaks>
     <escapechar/>
@@ -549,7 +549,7 @@
     <length>Characters</length>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C:\Users\HP\OneDrive\Desktop\Dataset_Ecommerce\Ecommerce Order Dataset\train\Customers.csv</name>
+      <name>C:\Users\hp\Desktop\BI_PROJECT\data\df_Customers.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -564,9 +564,9 @@
         <name>customer_id</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -579,9 +579,9 @@
         <name>customer_zip_code_prefix</name>
         <type>Integer</type>
         <format>#</format>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -594,13 +594,13 @@
         <name>customer_city</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>23</length>
+        <length>27</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -609,9 +609,9 @@
         <name>customer_state</name>
         <type>String</type>
         <format/>
-        <currency>$</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency>€</currency>
+        <decimal>,</decimal>
+        <group> </group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -707,7 +707,7 @@
       <schema_name/>
     </partitioning>
     <connection>DW_Project</connection>
-    <commit>100</commit>
+    <commit>38280</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>dw_project</schema>
