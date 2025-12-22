@@ -611,6 +611,7 @@
         <set_empty_string>N</set_empty_string>
       </field>
     </fields>
+    <limit>730</limit>
     <limit>3650</limit>
     <never_ending>N</never_ending>
     <interval_in_ms>5000</interval_in_ms>
@@ -626,6 +627,7 @@
     </remotesteps>
     <GUI>
       <xloc>48</xloc>
+      <yloc>176</yloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
@@ -655,7 +657,7 @@ counter = counterPrev + 1;
 counterPrev = counter;
 
 // Calcul de la date
-var startDate = new Date(2020, 0, 1); // 1er janvier 2020
+var startDate = new Date(2017, 0, 1); // 1er janvier 2017
 full_date = new Date(startDate.getTime() + (counter-1) * 24*60*60*1000);
 
 // date_key pour la table
@@ -755,6 +757,7 @@ date_key = counter;
     </remotesteps>
     <GUI>
       <xloc>592</xloc>
+      <yloc>80</yloc>
       <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
