@@ -441,7 +441,7 @@
     <type>MYSQL</type>
     <access>Native</access>
     <database>dw_project</database>
-    <port>3307</port>
+    <port>3306</port>
     <username>root</username>
     <password>Encrypted </password>
     <servername/>
@@ -470,7 +470,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>3307</attribute>
+        <attribute>3306</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
@@ -612,7 +612,6 @@
       </field>
     </fields>
     <limit>730</limit>
-    <limit>3650</limit>
     <never_ending>N</never_ending>
     <interval_in_ms>5000</interval_in_ms>
     <row_time_field>now</row_time_field>
@@ -628,7 +627,6 @@
     <GUI>
       <xloc>48</xloc>
       <yloc>176</yloc>
-      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -758,7 +756,6 @@ date_key = counter;
     <GUI>
       <xloc>592</xloc>
       <yloc>80</yloc>
-      <yloc>96</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
