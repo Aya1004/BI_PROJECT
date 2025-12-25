@@ -540,16 +540,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Source_Order_Items</from>
-      <to>Sort_Orders_Items</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Source_Orders</from>
-      <to>Sort_Orders</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Sort_Orders_Items</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
@@ -560,18 +550,23 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge join</from>
-      <to>Calculator</to>
+      <from>Select values</from>
+      <to>Sort_Orders_Items</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Calculator</from>
-      <to>Stream lookup</to>
+      <from>Select values 3</from>
+      <to>Sort_Orders</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Stream lookup 4</from>
-      <to>Calculator 2</to>
+      <from>Source_Order_Items</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Source_Orders</from>
+      <to>Select values 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -579,7 +574,63 @@
       <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Merge join</from>
+      <to>Stream lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup 4</from>
+      <to>Modified JavaScript value</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Modified JavaScript value</from>
+      <to>Calculator 2</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Calculator 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>sales_amount</field_name>
+      <calc_type>ADD</calc_type>
+      <field_a>shipping_charges</field_a>
+      <field_b>price</field_b>
+      <field_c/>
+      <value_type>None</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>944</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Dim_customer</name>
     <type>TableInput</type>
@@ -658,8 +709,8 @@ FROM dim_customer;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>576</yloc>
+      <xloc>624</xloc>
+      <yloc>768</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -743,8 +794,8 @@ FROM dim_product;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>352</yloc>
+      <xloc>624</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -826,8 +877,8 @@ FROM dim_seller;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>464</yloc>
+      <xloc>624</xloc>
+      <yloc>656</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -909,8 +960,8 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>672</yloc>
+      <xloc>624</xloc>
+      <yloc>864</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -943,8 +994,68 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>256</yloc>
+      <xloc>656</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>order_id</name>
+      </field>
+      <field>
+        <name>product_id</name>
+      </field>
+      <field>
+        <name>seller_id</name>
+      </field>
+      <field>
+        <name>price</name>
+      </field>
+      <field>
+        <name>shipping_charges</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>order_id</name>
+        <rename>order_id</rename>
+        <type>String</type>
+        <length>12</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -962,35 +1073,27 @@ FROM dim_time;
     <fields>
       <field>
         <name>customer_key</name>
-        <rename/>
       </field>
       <field>
         <name>product_key</name>
-        <rename/>
       </field>
       <field>
         <name>seller_key</name>
-        <rename/>
       </field>
       <field>
         <name>purchase_date_key</name>
-        <rename/>
       </field>
       <field>
         <name>order_id</name>
-        <rename/>
       </field>
       <field>
         <name>price</name>
-        <rename/>
       </field>
       <field>
         <name>shipping_charges</name>
-        <rename/>
       </field>
       <field>
         <name>sales_amount</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1003,8 +1106,158 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>752</yloc>
+      <xloc>176</xloc>
+      <yloc>944</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>order_id</name>
+      </field>
+      <field>
+        <name>customer_id</name>
+      </field>
+      <field>
+        <name>order_status</name>
+      </field>
+      <field>
+        <name>order_purchase_timestamp</name>
+      </field>
+      <field>
+        <name>order_approved_at</name>
+      </field>
+      <field>
+        <name>order_delivered_timestamp</name>
+      </field>
+      <field>
+        <name>order_estimated_delivery_date</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>order_id</name>
+        <rename>order_id</rename>
+        <type>String</type>
+        <length>12</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>320</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort_Orders</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>order_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>480</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort_Orders_Items</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>order_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>464</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1099,7 +1352,7 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>64</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1159,20 +1412,20 @@ FROM dim_time;
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>11</length>
+        <length>9</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>order_purchase_timestamp</name>
-        <type>String</type>
-        <format/>
+        <type>Date</type>
+        <format>dd/MM/yyyy</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>16</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
       </field>
       <field>
         <name>order_approved_at</name>
@@ -1217,7 +1470,7 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
+      <xloc>64</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1259,8 +1512,8 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>352</yloc>
+      <xloc>448</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1301,8 +1554,8 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>464</yloc>
+      <xloc>448</xloc>
+      <yloc>656</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1330,7 +1583,7 @@ FROM dim_time;
       <value>
         <name>customer_key</name>
         <rename>customer_key</rename>
-        <default/>
+        <default>0</default>
         <type>Integer</type>
       </value>
     </lookup>
@@ -1343,8 +1596,8 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>576</yloc>
+      <xloc>448</xloc>
+      <yloc>768</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1366,7 +1619,7 @@ FROM dim_time;
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
-        <name>purchase_date</name>
+        <name>order_purchase_timestamp</name>
         <field>full_date</field>
       </key>
       <value>
@@ -1385,8 +1638,8 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>672</yloc>
+      <xloc>448</xloc>
+      <yloc>864</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1461,14 +1714,14 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>752</yloc>
+      <xloc>48</xloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Sort_Orders_Items</name>
-    <type>SortRows</type>
+    <name>Modified JavaScript value</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1477,23 +1730,25 @@ FROM dim_time;
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>order_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+if (customer_key == null || customer_key == "") {
+    customer_key = 0; // ou "UNKNOWN" si c'est un string
+}
+
+if (purchase_date_key == null) {
+  purchase_date_key = 0; // ou un ID spécial “UNKNOWN” dans dim_time
+}
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1503,132 +1758,8 @@ FROM dim_time;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort_Orders</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>order_id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>224</xloc>
-      <yloc>320</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Calculator</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <failIfNoFile>Y</failIfNoFile>
-    <calculation>
-      <field_name>purchase_date</field_name>
-      <calc_type>REMOVE_TIME_FROM_DATE</calc_type>
-      <field_a>order_purchase_timestamp</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>Date</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>352</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Calculator 2</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <failIfNoFile>Y</failIfNoFile>
-    <calculation>
-      <field_name>sales_amount</field_name>
-      <calc_type>ADD</calc_type>
-      <field_a>shipping_charges</field_a>
-      <field_b>price</field_b>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>560</xloc>
-      <yloc>752</yloc>
+      <xloc>448</xloc>
+      <yloc>944</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

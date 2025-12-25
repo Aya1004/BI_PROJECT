@@ -525,7 +525,7 @@
     <passing_through_fields>N</passing_through_fields>
     <accept_field/>
     <accept_stepname/>
-    <separator>;</separator>
+    <separator>,</separator>
     <enclosure>"</enclosure>
     <enclosure_breaks>N</enclosure_breaks>
     <escapechar/>
@@ -564,9 +564,9 @@
         <name>customer_id</name>
         <type>String</type>
         <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group> </group>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -579,9 +579,9 @@
         <name>customer_zip_code_prefix</name>
         <type>Integer</type>
         <format>#</format>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group> </group>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -594,13 +594,13 @@
         <name>customer_city</name>
         <type>String</type>
         <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group> </group>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>27</length>
+        <length>23</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -609,9 +609,9 @@
         <name>customer_state</name>
         <type>String</type>
         <format/>
-        <currency>€</currency>
-        <decimal>,</decimal>
-        <group> </group>
+        <currency>$</currency>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
@@ -707,7 +707,7 @@
       <schema_name/>
     </partitioning>
     <connection>DW_Project</connection>
-    <commit>38280</commit>
+    <commit>89317</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>dw_project</schema>
@@ -715,6 +715,30 @@
       <key>
         <name>customer_id</name>
         <field>customer_id</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>customer_zip_code_prefix</name>
+        <field>customer_zip_code_prefix</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>customer_city</name>
+        <field>customer_city</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>customer_state</name>
+        <field>customer_state</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>customer_key</name>
+        <field>customer_key</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -736,6 +760,11 @@
       <value>
         <name>customer_state</name>
         <rename>customer_state</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>customer_key</name>
+        <rename>customer_key</rename>
         <update>Y</update>
       </value>
     </lookup>
