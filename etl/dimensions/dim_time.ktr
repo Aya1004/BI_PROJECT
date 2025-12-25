@@ -441,7 +441,7 @@
     <type>MYSQL</type>
     <access>Native</access>
     <database>dw_project</database>
-    <port>3306</port>
+    <port>3307</port>
     <username>root</username>
     <password>Encrypted </password>
     <servername/>
@@ -470,7 +470,7 @@
       </attribute>
       <attribute>
         <code>PORT_NUMBER</code>
-        <attribute>3306</attribute>
+        <attribute>3307</attribute>
       </attribute>
       <attribute>
         <code>PRESERVE_RESERVED_WORD_CASE</code>
