@@ -1,0 +1,50 @@
+<Schema name="sales_cube">
+  <Cube name="Sales" caption="Sales" visible="true" description="Description : Cube OLAP pour analyser les ventes selon les dimensions Time, Customer, Product et Seller. Permet le drill-down et le roll-up pour faciliter la prise de d&#233;cision. " cache="true" enabled="true">
+    <Table name="fact_sales" alias="fact_sales">
+    </Table>
+    <Dimension type="TimeDimension" visible="true" foreignKey="purchase_date_key" highCardinality="false" name="Time">
+      <Hierarchy name="THierarchy" visible="true" hasAll="true" primaryKey="date_key" primaryKeyTable="dim_time">
+        <Table name="dim_time">
+        </Table>
+        <Level name="Year" visible="true" table="dim_time" column="year" type="Numeric" uniqueMembers="false" levelType="TimeYears" hideMemberIf="Never">
+        </Level>
+        <Level name="Month" visible="true" table="dim_time" column="month" type="Numeric" uniqueMembers="false" levelType="TimeMonths" hideMemberIf="Never">
+        </Level>
+        <Level name="Day" visible="true" table="dim_time" column="day" type="Numeric" uniqueMembers="false" levelType="TimeDays" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="customer_key" highCardinality="false" name="Customer">
+      <Hierarchy name="CHierarchy" visible="true" hasAll="true" primaryKey="customer_key" primaryKeyTable="dim_customer">
+        <Table name="dim_customer" alias="dim_customer">
+        </Table>
+        <Level name="State" visible="true" table="dim_customer" column="customer_state" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="City" visible="true" table="dim_customer" column="customer_city" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Customer" visible="true" table="dim_customer" column="customer_id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="product_key" highCardinality="false" name="Product">
+      <Hierarchy name="PHierarchy" visible="true" hasAll="true" primaryKey="product_key" primaryKeyTable="dim_product">
+        <Table name="dim_product" alias="dim_product">
+        </Table>
+        <Level name="Category" visible="true" table="dim_product" column="product_category_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Product" visible="true" table="dim_product" column="product_id" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="seller_key" highCardinality="false" name="Seller">
+      <Hierarchy name="SHierarchy" visible="true" hasAll="true" primaryKey="seller_key" primaryKeyTable="dim_seller">
+        <Table name="dim_seller" alias="dim_seller">
+        </Table>
+        <Level name="Seller Name" visible="true" table="dim_seller" column="seller_name" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Total Sales" column="sales_amount" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
