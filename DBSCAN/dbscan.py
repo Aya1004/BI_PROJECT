@@ -13,17 +13,13 @@ import numpy as np
 # 1️⃣ Charger les données
 # ==========================
 df = pd.read_csv('fact_sales.csv')
-# print(df.head())
+print(df.head())
 
-# ==========================
-# 2️⃣ Normalisation
-# ==========================
+#  Normalisation
 X = df[['price', 'shipping_charges', 'sales_amount']].values
 X_scaled = StandardScaler().fit_transform(X)
-# print(X_scaled[:5])
+print(X_scaled[:5])
 
-# Création classes réelles (pédagogique)
-df['real_class'] = df['sales_amount'].apply(lambda x: 1 if x >= 2000 else 0)
 
 # ==========================
 # 3️⃣ Graphe k-distance pour choisir eps
@@ -44,7 +40,7 @@ plt.show()
 # ==========================
 # 4️⃣ DBSCAN
 # ==========================
-eps = 0.35
+eps = 0.47
 db = DBSCAN(eps=eps, min_samples=min_samples)
 df['cluster'] = db.fit_predict(X_scaled)
 
@@ -98,61 +94,8 @@ print(f"Clusters trouvés: {n_clusters}, Points bruit: {n_noise}")
 # ==========================
 # 8️⃣ Analyse des clusters
 # ==========================
-print(df.groupby('cluster')[['price','shipping_charges','sales_amount']].mean())
+#print(df.groupby('cluster')[['price','shipping_charges','sales_amount']].mean())
 score = silhouette_score(X_scaled, db.labels_)
 print("Silhouette Score :", score)
 db_index = davies_bouldin_score(X_scaled, db.labels_)
 print("Davies-Bouldin Index :", db_index)
-
-# ========================== 
-# 9️⃣ MATRICE DE CONFUSION & METRICS REALISTES
-# ==========================
-
-# Q3 comme seuil High Sales
-threshold = df['sales_amount'].quantile(0.75)
-df['real_class'] = df['sales_amount'].apply(lambda x: 1 if x >= threshold else 0)
-print("Seuil High Sales (Q3) :", threshold)
-print("Distribution des classes réelles :\n", df['real_class'].value_counts())
-
-# DBSCAN pour matrice confusion (réutiliser eps)
-df['cluster'] = db.fit_predict(X_scaled)
-
-# Calcul moyenne de sales_amount par cluster
-cluster_sales_mean = df.groupby('cluster')['sales_amount'].mean()
-print("\nMoyenne de sales_amount par cluster :\n", cluster_sales_mean)
-
-# Identifier clusters High Sales : toutes les moyennes >= seuil Q3
-high_sales_clusters = cluster_sales_mean[cluster_sales_mean >= threshold].index.tolist()
-print("\nClusters identifiés comme High Sales :", high_sales_clusters)
-
-# Mapping cluster -> predicted_class
-df['predicted_class'] = df['cluster'].apply(lambda x: 1 if x in high_sales_clusters else 0)
-
-# Matrice de confusion et métriques
-y_true = df['real_class']
-y_pred = df['predicted_class']
-
-cm = confusion_matrix(y_true, y_pred)
-accuracy = accuracy_score(y_true, y_pred)
-precision = precision_score(y_true, y_pred)
-
-print("\nMatrice de confusion :")
-print(cm)
-print("Accuracy :", accuracy)
-print("Precision :", precision)
-
-# Diagramme matrice de confusion
-plt.figure(figsize=(6,5))
-plt.imshow(cm, cmap='Blues')
-plt.colorbar()
-plt.xticks([0, 1], ['Low Sales', 'High Sales'])
-plt.yticks([0, 1], ['Low Sales', 'High Sales'])
-
-for i in range(2):
-    for j in range(2):
-        plt.text(j, i, cm[i, j], ha='center', va='center', color='black')
-
-plt.xlabel('Classe prédite')
-plt.ylabel('Classe réelle')
-plt.title('Matrice de confusion (DBSCAN – dataset complet)')
-plt.show()
