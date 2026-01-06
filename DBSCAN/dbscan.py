@@ -12,7 +12,7 @@ import numpy as np
 # ==========================
 # 1️⃣ Charger les données
 # ==========================
-df = pd.read_csv('fact_sales.csv')
+df = pd.read_csv('C:\\Users\\hp\\Desktop\\BI_PROJECT\\DBSCAN\\fact_sales.csv')
 print(df.head())
 
 #  Normalisation
